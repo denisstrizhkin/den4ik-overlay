@@ -17,5 +17,6 @@ KEYWORDS="~amd64"
 RDEPEND="sys-boot/efibootmgr"
 
 src_install() {
+	default
 	distutils-r1_src_install
 }
