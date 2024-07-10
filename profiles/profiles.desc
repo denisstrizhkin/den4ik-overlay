@@ -6,3 +6,4 @@ amd64 desktop-nomultilib-23.0 dev
 
 amd64 desktop-musl-23.0 dev
 amd64 desktop-musl-llvm-23.0 dev
+amd64 hardened-musl-llvm-23.0 dev
