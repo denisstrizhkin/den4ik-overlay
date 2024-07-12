@@ -16,6 +16,6 @@ LICENSE="GPL-3+"
 SLOT="0"
 KEYWORDS="~amd64"
 
-BDEPENDS="app-emacs/autothemer"
+BDEPEND="app-emacs/autothemer"
 
 SITEFILE="50${PN}-gentoo.el"
