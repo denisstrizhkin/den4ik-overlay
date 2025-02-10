@@ -77,7 +77,7 @@ RDEPEND="${COMMON_DEPEND}
 "
 
 PATCHES=(
-	"${FILESDIR}/transmission-4.0.6-miniupnpc-2.2.8.patch"
+	"${FILESDIR}/transmission-4.0.5-miniupnpc-2.2.8.patch"
 )
 
 src_configure() {

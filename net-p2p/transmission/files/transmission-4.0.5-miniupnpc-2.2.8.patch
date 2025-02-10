@@ -1,0 +1,30 @@
+From 931b060b3d46c5794865e8c1c9f83e6349b806f2 Mon Sep 17 00:00:00 2001
+From: Denis Strizhkin <strdenis02@gmail.com>
+Date: Mon, 10 Feb 2025 23:45:02 +0300
+Subject: [PATCH] patch
+
+---
+ libtransmission/port-forwarding-upnp.cc | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/libtransmission/port-forwarding-upnp.cc b/libtransmission/port-forwarding-upnp.cc
+index 7c4865b..ccfdbec 100644
+--- a/libtransmission/port-forwarding-upnp.cc
++++ b/libtransmission/port-forwarding-upnp.cc
+@@ -275,8 +275,12 @@ tr_port_forwarding_state tr_upnpPulse(tr_upnp* handle, tr_port port, bool is_ena
+ 
+         FreeUPNPUrls(&handle->urls);
+         auto lanaddr = std::array<char, TR_ADDRSTRLEN>{};
++#if (MINIUPNPC_API_VERSION >= 18)
++        if (UPNP_GetValidIGD(devlist, &handle->urls, &handle->data, std::data(lanaddr), std::size(lanaddr) - 1, NULL, 0) ==
++#else
+         if (UPNP_GetValidIGD(devlist, &handle->urls, &handle->data, std::data(lanaddr), std::size(lanaddr) - 1) ==
+-            UPNP_IGD_VALID_CONNECTED)
++#endif
++             UPNP_IGD_VALID_CONNECTED)
+         {
+             tr_logAddInfo(fmt::format(_("Found Internet Gateway Device '{url}'"), fmt::arg("url", handle->urls.controlURL)));
+             tr_logAddInfo(fmt::format(_("Local Address is '{address}'"), fmt::arg("address", lanaddr.data())));
+-- 
+2.45.3
+
