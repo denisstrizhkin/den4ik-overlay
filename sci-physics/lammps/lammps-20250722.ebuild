@@ -37,7 +37,7 @@ S="${WORKDIR}/${MY_P}/cmake"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="cuda examples extra gzip hip lammps-memalign mpi opencl openmp python test"
+IUSE="cuda examples extra gzip hip kokkos lammps-memalign mpi opencl openmp python test"
 # Requires write access to /dev/dri/renderD...
 RESTRICT="test"
 
@@ -57,14 +57,13 @@ RDEPEND="
 	sci-libs/netcdf:=
 	cuda? ( >=dev-util/nvidia-cuda-toolkit-4.2.9-r1:= )
 	opencl? ( virtual/opencl )
+	kokkos? ( >=dev-cpp/kokkos-4.6.2-r1 )
 	hip? (
 		dev-util/hip:=
 		sci-libs/hipCUB:=
 	)
 	dev-cpp/eigen:3
 	"
-	# Kokkos-3.5 not in tree atm
-	# kokkos? ( dev-cpp/kokkos-3.5.* )
 BDEPEND="${DISTUTILS_DEPS}"
 DEPEND="${RDEPEND}
 	test? (
@@ -114,9 +113,8 @@ src_configure() {
 		-DPKG_GRANULAR=ON
 		-DPKG_KSPACE=ON
 		-DFFT=FFTW3
-		-DPKG_KOKKOS=OFF
-		#-DPKG_KOKKOS=$(usex kokkos)
-		#$(use kokkos && echo -DEXTERNAL_KOKKOS=ON)
+		-DPKG_KOKKOS=$(usex kokkos)
+		$(use kokkos && echo -DEXTERNAL_KOKKOS=ON)
 		-DPKG_MANYBODY=ON
 		-DPKG_MC=ON
 		-DPKG_MEAM=ON
