@@ -1,5 +1,7 @@
 amd64 systemd-llvm-nomultilib-23.0 dev
+amd64 systemd-llvm-plasma-23.0 dev
 amd64 systemd-llvm-plasma-nomultilib-23.0 dev
+
 amd64 systemd-plasma-nomultilib-23.0 dev
 
 amd64 desktop-nomultilib-23.0 dev
