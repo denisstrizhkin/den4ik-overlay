@@ -49,13 +49,16 @@ SRC_URI="
 	test? (
 		https://github.com/google/googletest/archive/release-1.12.1.tar.gz -> ${PN}-gtest-1.12.1.tar.gz
 	)
+	pace? (
+		https://github.com/ICAMS/lammps-user-pace/archive/refs/tags/v.2023.11.25.fix2.tar.gz -> ${PN}-pace-v.2023.11.25.fix2.tar.gz
+	)
 "
 S="${WORKDIR}/${MY_P}/cmake"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="cuda examples extra gzip hip kokkos lammps-memalign mpi opencl openmp python test"
+IUSE="cuda examples extra gzip hip kokkos lammps-memalign mpi opencl openmp pace python test"
 # Requires write access to /dev/dri/renderD...
 RESTRICT="test"
 
@@ -146,6 +149,8 @@ src_configure() {
 		-DPKG_RIGID=ON
 		-DPKG_SHOCK=ON
 		-DPKG_SRD=ON
+		-DPKG_ML-PACE=$(usex pace)
+		$(use pace && echo -DPACELIB_URL="file://${DISTDIR}/${PN}-pace-v.2023.11.25.fix2.tar.gz")
 		-DPKG_PYTHON=$(usex python)
 		-DPKG_MPIIO=$(usex mpi)
 		-DPKG_VORONOI=ON
