@@ -123,6 +123,7 @@ src_configure() {
 		-DPKG_COMPRESS=ON
 		-DPKG_CORESHELL=ON
 		-DPKG_DIPOLE=ON
+		-DPKG_EXTRA-COMMAND=$(usex extra)
 		-DPKG_EXTRA-COMPUTE=$(usex extra)
 		-DPKG_EXTRA-DUMP=$(usex extra)
 		-DPKG_EXTRA-FIX=$(usex extra)
