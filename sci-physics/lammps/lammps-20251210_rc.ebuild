@@ -28,18 +28,15 @@ MY_YEAR="${MY_DATE:0:4}"
 MY_MONTH="$(convert_month ${MY_DATE:4:2})"
 MY_DAY="$((10#${MY_DATE:6:2}))"
 
-MY_PV="$((10#${PV:6:2}))$(convert_month ${PV:4:2})${PV:0:4}"
-MY_P="${PN}-stable_${MY_PV}"
-
 if [[ "${MY_SUFFIX:0:3}" == "_rc" ]]; then
-    MY_TYPE="patch"
-    MY_SUFFIX=""
+	MY_TYPE="patch"
+	MY_SUFFIX=""
 elif [[ "${MY_SUFFIX:0:2}" == "_p" ]]; then
-    MY_TYPE="stable"
-    MY_SUFFIX="_update${MY_SUFFIX#_p}"
+	MY_TYPE="stable"
+	MY_SUFFIX="_update${MY_SUFFIX#_p}"
 else
-    MY_TYPE="stable"
-    MY_SUFFIX=""
+	MY_TYPE="stable"
+	MY_SUFFIX=""
 fi
 
 MY_PV="${MY_DAY}${MY_MONTH}${MY_YEAR}${MY_SUFFIX}"
@@ -65,7 +62,7 @@ RESTRICT="test"
 RDEPEND="
 	app-arch/gzip
 	media-libs/libpng:0
-	sys-libs/zlib
+	virtual/zlib
 	mpi? (
 		virtual/mpi
 		sci-libs/hdf5:=[mpi]
